@@ -11,17 +11,10 @@
 <body class="na-landing">
     <section class="landing" id="landing">
         <div class="landing-conteudo">
-            <div class="landing-icone"></div>
             <p class="landing-etiqueta">Comunidade de leitura</p>
             <h1>EntrePáginas</h1>
             <p class="landing-texto">Todo livro merece um novo leitor. Empreste, descubra e compartilhe histórias com
                 pessoas perto de você.</p>
-
-            <div class="landing-chips">
-                <span>Cadastre</span>
-                <span>Explore</span>
-                <span>Solicite</span>
-            </div>
 
             <button type="button" id="btn-conhecer" class="landing-botao">Deseja nos conhecer?</button>
         </div>
@@ -257,7 +250,7 @@
         var perfilBio = document.querySelector('.bio');
         var inputNomeForm = document.getElementById('nome');
 
-        //EU NAO CONSIGO FAZER A OPÇÃO DE REMOVER O LIVROOOOOOOOOOOOOOOOOOO
+        //EU NAO CONSIGO FAZER A OPÇÃO DE REMOVER O LIVROOOOOOOOOOOOOOOOOOO - Rian
 
         function criarCard(titulo, autor, descricao, local, tempo, nome) {
             mensagemVazia.style.display = 'none';
@@ -346,7 +339,7 @@
 
                     if (totalLivros == 0) {
                         mensagemVazia.querySelector('strong').textContent = 'Não há livros disponíveis para empréstimo.';
-                        mensagemVazia.querySelector('p').textContent = 'Cadastre um livro usando a aba Adicionar.';
+                        mensagemVazia.querySelector('p').textContent = 'Cadastre o primeiro livro usando a aba Adicionar.';
                         mensagemVazia.style.display = 'block';
 
                         listaPerto.textContent = 'Não há livros disponíveis para empréstimo no momento.';
@@ -501,7 +494,6 @@
                 fecharModal();
             }
         };
-
     </script>
 </body>
 
