@@ -1,0 +1,26 @@
+[
+    {
+        "titulo": "O Pequeno Príncipe",
+        "autor": "Antoine de Saint-Exupéry",
+        "descricao": "Uma história poética sobre amizade, amor e o que realmente importa na vida.",
+        "local": "Centro",
+        "tempo": "2 Semanas",
+        "nome": "Caio"
+    },
+    {
+        "titulo": "Dom Casmurro",
+        "autor": "Machado de Assis",
+        "descricao": "Clássico brasileiro sobre as memórias de Bentinho e o mistério de Capitu.",
+        "local": "Jardins",
+        "tempo": "1 Mês",
+        "nome": "Rian"
+    },
+    {
+        "titulo": "A Hora da Estrela",
+        "autor": "Clarice Lispector",
+        "descricao": "A trajetória delicada e marcante da jovem Macabéa no Rio de Janeiro.",
+        "local": "Vila Nova",
+        "tempo": "3 Semanas",
+        "nome": "Moises"
+    }
+]

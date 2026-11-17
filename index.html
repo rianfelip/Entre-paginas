@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EntrePáginas</title>
+    <link rel="stylesheet" href="entrepaginas.css">
+</head>
+
+<body class="na-landing">
+    <section class="landing" id="landing">
+        <div class="landing-conteudo">
+            <div class="landing-icone">📖</div>
+            <p class="landing-etiqueta">Comunidade de leitura</p>
+            <h1>EntrePáginas</h1>
+            <p class="landing-texto">Todo livro merece um novo leitor. Empreste, descubra e compartilhe histórias com
+                pessoas perto de você.</p>
+
+            <div class="landing-chips">
+                <span>Cadastre</span>
+                <span>Explore</span>
+                <span>Solicite</span>
+            </div>
+
+            <button type="button" id="btn-conhecer" class="landing-botao">Deseja nos conhecer?</button>
+        </div>
+    </section>
+
+    <div class="app">
+
+        <header>
+            <div>
+                <h2>Comunidade de leitura</h2>
+                <h1>EntrePáginas</h1>
+            </div>
+            <button type="button" id="btn-tema" class="botao-tema"> Modo escuro</button>
+        </header>
+
+        <main>
+            <section id="adicionar" class="tela ativa">
+                <p class="titulo">Nova História</p>
+                <p class="subtitulo">Coloque um livro em circulação.</p>
+                <p class="texto">Compartilhe um título que merece encontrar um novo leitor perto de você.</p>
+
+                <form>
+                    <div>
+                        <label for="titulo">Título do livro</label>
+                        <input type="text" id="titulo" required>
+                    </div>
+
+                    <div>
+                        <label for="autor">Autor(a)</label>
+                        <input type="text" id="autor" required>
+                    </div>
+
+                    <div>
+                        <label for="descricao">Descrição</label>
+                        <input type="text" id="descricao" required>
+                    </div>
+
+                    <div class="linha-dupla">
+                        <div>
+                            <label for="local">Local</label>
+                            <input type="text" id="local">
+                        </div>
+
+                        <div>
+                            <label for="tempo">Por quanto tempo?</label>
+                            <select id="tempo" required>
+                                <option value="" disabled selected>Selecione um tempo...</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="nome">Seu nome</label>
+                            <input type="text" id="nome" required>
+                        </div>
+
+                        <div>
+                            <label for="endereco">Onde você mora?</label>
+                            <input type="text" id="endereco" required>
+                        </div>
+                    </div>
+
+                    <div class="checkboxcampo">
+                        <label>
+                            <input type="checkbox" name="disponivel" value="sim">
+                            Esse livro está disponível agora
+                        </label>
+                    </div>
+
+                    <button type="submit">Adicionar à estante</button>
+                </form>
+            </section>
+
+            <section id="perfil" class="tela">
+                <p class="leitores">Minha conta</p>
+                <p class="historias">Seu cantinho do leitor</p>
+
+                <div class="card">
+
+                    <div class="topo">
+                        <div class="avatar" id="perfil-avatar">👤</div>
+
+                        <div>
+                            <h3 id="perfil-nome"></h3>
+                            <p class="usuario" id="perfil-usuario"></p>
+                            <span class="chip" id="perfil-local"></span>
+                        </div>
+                    </div>
+
+                    <p class="bio"></p>
+
+                    <div class="numeros">
+                        <div><strong id="num-para-emprestar">0</strong><span>Livros para emprestar</span></div>
+                        <div><strong id="num-emprestimos">0</strong><span>Empréstimos</span></div>
+                    </div>
+
+                    <div class="acoes-perfil">
+                        <button type="button" id="btn-editar-perfil" class="btn-perfil">Editar perfil</button>
+                    </div>
+                </div>
+
+                <p class="historias preferencias-titulo">Meus empréstimos</p>
+                <div class="estante-vazia" id="emprestimos-vazio">
+                    <strong>Você ainda não pediu nenhum livro.</strong>
+                    <p>Vá até a Estante e toque em "Solicitar empréstimo".</p>
+                </div>
+                <div id="lista-emprestimos"></div>
+            </section>
+
+            <section id="estante" class="tela">
+                <div class="titulo-estante">
+                    <div>
+                        <p class="subtitulo">ESTANTE VIRTUAL</p>
+                        <h2>Livros disponíveis</h2>
+                    </div>
+
+                    <span class="contador">0 livros</span>
+                </div>
+
+                <p class="descricao">Explore os livros cadastrados pela comunidade e encontre sua próxima leitura.</p>
+
+                <div class="estante-vazia" id="mensagem-vazia">
+                    <div class="icone-livro">▣</div>
+                    <strong>A estante está esperando por histórias.</strong>
+                    <p>Cadastre o primeiro livro usando a aba Adicionar.</p>
+                </div>
+
+                <div id="lista-livros"></div>
+            </section>
+
+            <section id="perto" class="tela">
+                <p class="leitores">Leitores Próximos</p>
+                <p class="historias">Histórias ao seu redor</p>
+                <p class="texto">Veja pontos de encontro e leitores que têm livros disponíveis na sua região.</p>
+
+                <div>
+                    <h3>Quem está por perto</h3>
+                </div>
+
+                <div class="qmestaperto" id="lista-perto">
+                    Cadastre um livro disponível para começar a ver a comunidade próxima.
+                </div>
+            </section>
+        </main>
+
+        <nav class="menu">
+            <a href="#adicionar" class="menu-item">Adicionar</a>
+            <a href="#perfil" class="menu-item">Perfil</a>
+            <a href="#estante" class="menu-item">Estante</a>
+            <a href="#perto" class="menu-item">Perto</a>
+        </nav>
+
+        <div class="modal" id="modal-perfil">
+            <div class="modal-caixa" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+                <button type="button" class="modal-fechar" id="btn-fechar-modal" aria-label="Fechar">&times;</button>
+
+                <div class="modal-topo">
+                    <div class="avatar avatar-modal" id="modal-avatar">👤</div>
+                    <div>
+                        <h3 id="modal-titulo">Editar perfil</h3>
+                        <p class="modal-sub">Altere suas informações e toque em salvar.</p>
+                    </div>
+                </div>
+
+                <div class="modal-corpo">
+                    <label for="edit-nome">Nome</label>
+                    <input type="text" id="edit-nome" class="campo-modal" maxlength="40">
+
+                    <label for="edit-usuario">Usuário</label>
+                    <input type="text" id="edit-usuario" class="campo-modal" maxlength="30">
+
+                    <label for="edit-local">Localização</label>
+                    <input type="text" id="edit-local" class="campo-modal" maxlength="40">
+
+                    <label for="edit-bio">Sobre você</label>
+                    <textarea id="edit-bio" class="campo-modal" rows="4" maxlength="150"></textarea>
+                    <span class="contagem-bio" id="contagem-bio">0/150</span>
+                </div>
+
+                <div class="modal-rodape">
+                    <button type="button" id="btn-cancelar-perfil" class="btn-perfil btn-cancelar">Cancelar</button>
+                    <button type="button" id="btn-salvar-perfil" class="btn-perfil">Salvar alterações</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+
+        // ===== TELA DE ABERTURA (LANDING) =====
+        var btnConhecer = document.getElementById('btn-conhecer');
+
+        btnConhecer.onclick = function () {
+            document.body.classList.remove('na-landing');
+            window.scrollTo(0, 0);
+        };
+
+
+        /* para aquele que lerá o codigo esse negocio de trocar a pagina pelo botao no script 
+        é algo novo adaptado do que o gpt me passou talvez esteja errado :(*/
+
+        var botoes = document.querySelectorAll('.menu-item');
+        var telas = document.querySelectorAll('.tela');
+
+        for (var i = 0; i < botoes.length; i++) {
+            botoes[i].onclick = function (e) {
+                e.preventDefault();
+
+                for (var j = 0; j < botoes.length; j++) {
+                    botoes[j].classList.remove('ativo');
+                    telas[j].classList.remove('ativa');
+                }
+
+                this.classList.add('ativo');
+                var destino = this.getAttribute('href');
+                document.querySelector(destino).classList.add('ativa');
+            };
+        }
+
+        
+        var form = document.querySelector('form');
+        var listaLivros = document.getElementById('lista-livros');
+        var listaPerto = document.getElementById('lista-perto');
+        var mensagemVazia = document.getElementById('mensagem-vazia');
+        var contador = document.querySelector('.contador');
+        var totalLivros = 0;
+        var totalEmprestimos = 0;
+        var totalParaEmprestar = 0;
+        var numEmprestimos = document.getElementById('num-emprestimos');
+        var numParaEmprestar = document.getElementById('num-para-emprestar');
+        var emprestimosVazio = document.getElementById('emprestimos-vazio');
+        var listaEmp = document.getElementById('lista-emprestimos');
+
+        //EU NAO CONSIGO FAZER A OPÇÃO DE REMOVER O LIVROOOOOOOOOOOOOOOOOOO
+
+        function criarCard(titulo, autor, descricao, local, tempo, nome) {
+            mensagemVazia.style.display = 'none';
+            if (totalLivros == 0) {
+                listaPerto.innerHTML = '';
+                listaPerto.style.textAlign = 'left';
+            }
+            var card = document.createElement('div');
+            card.className = 'card';
+
+            var h3 = document.createElement('h3');
+            h3.textContent = titulo;
+
+            var pAutor = document.createElement('p');
+            pAutor.textContent = 'Autor(a): ' + autor;
+
+            var pDesc = document.createElement('p');
+            pDesc.className = 'detalhe-livro';
+            pDesc.textContent = descricao;
+
+            var pInfo = document.createElement('p');
+            pInfo.className = 'detalhe-livro';
+            pInfo.textContent = 'Dono(a): ' + nome + '. Local: ' + local + '. Tempo: ' + tempo;
+
+            card.appendChild(h3);
+            card.appendChild(pAutor);
+            card.appendChild(pDesc);
+            card.appendChild(pInfo);
+
+            listaLivros.appendChild(card);
+
+            var itemPerto = document.createElement('p');
+            itemPerto.textContent = local + ':' + titulo;
+
+            listaPerto.appendChild(itemPerto);
+
+            var btnEmprestar = document.createElement('button');
+            btnEmprestar.type = 'button';
+            btnEmprestar.textContent = 'Solicitar empréstimo';
+            btnEmprestar.className = 'btn-emprestar';
+
+            btnEmprestar.onclick = function () {
+                totalEmprestimos++;
+                numEmprestimos.textContent = totalEmprestimos;
+
+                emprestimosVazio.style.display = 'none';
+
+                var item = document.createElement('p');
+                item.className = 'item-emprestimo';
+                item.textContent = titulo + ' (' + nome + ', ' + local + ')';
+                listaEmp.appendChild(item);
+
+                // tira o livro da estante e da lista de perto
+                listaLivros.removeChild(card);
+                listaPerto.removeChild(itemPerto);
+
+                totalLivros--;
+                contador.textContent = totalLivros + ' livros';
+
+                // se não sobrou nenhum livro, mostra a mensagem
+                if (totalLivros == 0) {
+                    mensagemVazia.querySelector('strong').textContent = 'Não há livros disponíveis para empréstimo.';
+                    mensagemVazia.querySelector('p').textContent = 'Cadastre um livro usando a aba Adicionar.';
+                    mensagemVazia.style.display = 'block';
+
+                    listaPerto.textContent = 'Não há livros disponíveis para empréstimo no momento.';
+                    listaPerto.style.textAlign = 'center';
+                }
+            };
+
+            card.appendChild(btnEmprestar);
+
+            totalLivros++;
+            contador.textContent = totalLivros + ' livros';
+        }
+
+        // ===== DADOS CARREGADOS DOS ARQUIVOS JSON =====
+        // (precisa abrir por um servidor local, ex.: Live Server do VS Code)
+
+        function carregarJSON(arquivo) {
+            return fetch(arquivo).then(function (resposta) {
+                if (!resposta.ok) {
+                    throw new Error('Erro ao carregar ' + arquivo);
+                }
+                return resposta.json();
+            });
+        }
+
+        function mostrarErro() {
+            console.log('Não foi possível carregar um dos arquivos .json');
+        }
+
+        // livros da estante
+        carregarJSON('livros.json').then(function (livros) {
+            for (var i = 0; i < livros.length; i++) {
+                var livro = livros[i];
+                criarCard(livro.titulo, livro.autor, livro.descricao, livro.local, livro.tempo, livro.nome);
+            }
+        }).catch(mostrarErro);
+
+        // opções de tempo do formulário
+        carregarJSON('tempos.json').then(function (tempos) {
+            var selectTempo = document.getElementById('tempo');
+            for (var i = 0; i < tempos.length; i++) {
+                var opcao = document.createElement('option');
+                opcao.value = tempos[i];
+                opcao.textContent = tempos[i];
+                selectTempo.appendChild(opcao);
+            }
+        }).catch(mostrarErro);
+
+        // dados do perfil
+        carregarJSON('perfil.json').then(function (perfil) {
+            perfilNome.textContent = perfil.nome;
+            perfilUsuario.textContent = perfil.usuario;
+            perfilLocal.textContent = perfil.local;
+            perfilBio.textContent = perfil.bio;
+            perfilAvatar.textContent = inicial(perfil.nome);
+
+            totalParaEmprestar = perfil.livrosParaEmprestar;
+            totalEmprestimos = perfil.emprestimos;
+            numParaEmprestar.textContent = totalParaEmprestar;
+            numEmprestimos.textContent = totalEmprestimos;
+        }).catch(mostrarErro);
+
+        form.onsubmit = function (e) {
+            e.preventDefault();
+
+            var titulo = document.getElementById('titulo').value;
+            var autor = document.getElementById('autor').value;
+            var descricao = document.getElementById('descricao').value;
+            var local = document.getElementById('local').value;
+            var tempo = document.getElementById('tempo').value;
+            var nome = document.getElementById('nome').value;
+
+            criarCard(titulo, autor, descricao, local, tempo, nome);
+
+            totalParaEmprestar++;
+            numParaEmprestar.textContent = totalParaEmprestar;
+
+            form.reset();
+            document.querySelector('a[href="#estante"]').click();
+        };
+
+        /* MODO ESCURO REVOLUCIONARIO */
+
+        var btnTema = document.getElementById('btn-tema');
+
+        btnTema.onclick = function () {
+            document.body.classList.toggle('escuro');
+
+            if (document.body.classList.contains('escuro')) {
+                btnTema.textContent = 'Modo claro';
+            } else {
+                btnTema.textContent = 'Modo escuro';
+            }
+        };
+
+        var btnEditar = document.getElementById('btn-editar-perfil');
+        var btnCancelar = document.getElementById('btn-cancelar-perfil');
+        var btnSalvar = document.getElementById('btn-salvar-perfil');
+        var modal = document.getElementById('modal-perfil');
+
+        var perfilNome = document.getElementById('perfil-nome');
+        var perfilUsuario = document.getElementById('perfil-usuario');
+        var perfilLocal = document.getElementById('perfil-local');
+        var perfilBio = document.querySelector('.bio');
+
+        var editNome = document.getElementById('edit-nome');
+        var editUsuario = document.getElementById('edit-usuario');
+        var editLocal = document.getElementById('edit-local');
+        var editBio = document.getElementById('edit-bio');
+        var contagemBio = document.getElementById('contagem-bio');
+        var modalAvatar = document.getElementById('modal-avatar');
+        var perfilAvatar = document.getElementById('perfil-avatar');
+
+        // mostra a inicial do nome no avatar (ou o boneco se estiver vazio)
+        function inicial(texto) {
+            texto = texto.trim();
+            if (texto == '') {
+                return '👤';
+            }
+            return texto.charAt(0).toUpperCase();
+        }
+
+        function atualizarContagem() {
+            contagemBio.textContent = editBio.value.length + '/150';
+        }
+
+        editNome.oninput = function () {
+            modalAvatar.textContent = inicial(editNome.value);
+        };
+        editBio.oninput = atualizarContagem;
+
+        function abrirModal() {
+            // preenche os campos com o que já está no perfil
+            editNome.value = perfilNome.textContent.trim();
+            editUsuario.value = perfilUsuario.textContent.trim();
+            editLocal.value = perfilLocal.textContent.trim();
+            editBio.value = perfilBio.textContent.replace(/\s+/g, ' ').trim();
+            modalAvatar.textContent = inicial(editNome.value);
+            atualizarContagem();
+
+            modal.classList.add('aberto');
+            document.body.classList.add('modal-aberto');
+            editNome.focus();
+        }
+
+        function fecharModal() {
+            modal.classList.remove('aberto');
+            document.body.classList.remove('modal-aberto');
+        }
+
+        btnEditar.onclick = abrirModal;
+        btnCancelar.onclick = fecharModal;
+        document.getElementById('btn-fechar-modal').onclick = fecharModal;
+
+        btnSalvar.onclick = function () {
+            perfilNome.textContent = editNome.value;
+            perfilUsuario.textContent = editUsuario.value;
+            perfilLocal.textContent = editLocal.value;
+            perfilBio.textContent = editBio.value;
+            perfilAvatar.textContent = inicial(editNome.value);
+            fecharModal();
+        };
+
+        // clicar no fundo escuro (fora da caixa) fecha a modal
+        modal.onclick = function (e) {
+            if (e.target == modal) {
+                fecharModal();
+            }
+        };
+
+        // tecla Esc fecha a modal
+        document.onkeydown = function (e) {
+            if (e.key == 'Escape') {
+                fecharModal();
+            }
+        };
+
+    </script>
+</body>
+
+</html>
