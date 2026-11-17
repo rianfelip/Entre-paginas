@@ -11,7 +11,7 @@
 <body class="na-landing">
     <section class="landing" id="landing">
         <div class="landing-conteudo">
-            <div class="landing-icone">📖</div>
+            <div class="landing-icone"></div>
             <p class="landing-etiqueta">Comunidade de leitura</p>
             <h1>EntrePáginas</h1>
             <p class="landing-texto">Todo livro merece um novo leitor. Empreste, descubra e compartilhe histórias com
@@ -74,7 +74,7 @@
 
                         <div>
                             <label for="nome">Seu nome</label>
-                            <input type="text" id="nome" required>
+                            <input type="text" id="nome" readonly>
                         </div>
 
                         <div>
@@ -101,7 +101,7 @@
                 <div class="card">
 
                     <div class="topo">
-                        <div class="avatar" id="perfil-avatar">👤</div>
+                        <div class="avatar" id="perfil-avatar"></div>
 
                         <div>
                             <h3 id="perfil-nome"></h3>
@@ -143,7 +143,7 @@
                 <p class="descricao">Explore os livros cadastrados pela comunidade e encontre sua próxima leitura.</p>
 
                 <div class="estante-vazia" id="mensagem-vazia">
-                    <div class="icone-livro">▣</div>
+                    <div class="icone-livro"></div>
                     <strong>A estante está esperando por histórias.</strong>
                     <p>Cadastre o primeiro livro usando a aba Adicionar.</p>
                 </div>
@@ -174,11 +174,11 @@
         </nav>
 
         <div class="modal" id="modal-perfil">
-            <div class="modal-caixa" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
-                <button type="button" class="modal-fechar" id="btn-fechar-modal" aria-label="Fechar">&times;</button>
+            <div class="modal-caixa">
+                <button type="button" class="modal-fechar" id="btn-fechar-modal">&times;</button>
 
                 <div class="modal-topo">
-                    <div class="avatar avatar-modal" id="modal-avatar">👤</div>
+                    <div class="avatar avatar-modal" id="modal-avatar"></div>
                     <div>
                         <h3 id="modal-titulo">Editar perfil</h3>
                         <p class="modal-sub">Altere suas informações e toque em salvar.</p>
@@ -187,17 +187,16 @@
 
                 <div class="modal-corpo">
                     <label for="edit-nome">Nome</label>
-                    <input type="text" id="edit-nome" class="campo-modal" maxlength="40">
+                    <input type="text" id="edit-nome" class="campo-modal">
 
                     <label for="edit-usuario">Usuário</label>
-                    <input type="text" id="edit-usuario" class="campo-modal" maxlength="30">
+                    <input type="text" id="edit-usuario" class="campo-modal">
 
                     <label for="edit-local">Localização</label>
-                    <input type="text" id="edit-local" class="campo-modal" maxlength="40">
+                    <input type="text" id="edit-local" class="campo-modal">
 
                     <label for="edit-bio">Sobre você</label>
-                    <textarea id="edit-bio" class="campo-modal" rows="4" maxlength="150"></textarea>
-                    <span class="contagem-bio" id="contagem-bio">0/150</span>
+                    <textarea id="edit-bio" class="campo-modal" rows="4"></textarea>
                 </div>
 
                 <div class="modal-rodape">
@@ -210,7 +209,6 @@
     </div>
     <script>
 
-        // ===== TELA DE ABERTURA (LANDING) =====
         var btnConhecer = document.getElementById('btn-conhecer');
 
         btnConhecer.onclick = function () {
@@ -240,7 +238,6 @@
             };
         }
 
-        
         var form = document.querySelector('form');
         var listaLivros = document.getElementById('lista-livros');
         var listaPerto = document.getElementById('lista-perto');
@@ -253,6 +250,12 @@
         var numParaEmprestar = document.getElementById('num-para-emprestar');
         var emprestimosVazio = document.getElementById('emprestimos-vazio');
         var listaEmp = document.getElementById('lista-emprestimos');
+
+        var perfilNome = document.getElementById('perfil-nome');
+        var perfilUsuario = document.getElementById('perfil-usuario');
+        var perfilLocal = document.getElementById('perfil-local');
+        var perfilBio = document.querySelector('.bio');
+        var inputNomeForm = document.getElementById('nome');
 
         //EU NAO CONSIGO FAZER A OPÇÃO DE REMOVER O LIVROOOOOOOOOOOOOOOOOOO
 
@@ -291,48 +294,72 @@
 
             listaPerto.appendChild(itemPerto);
 
-            var btnEmprestar = document.createElement('button');
-            btnEmprestar.type = 'button';
-            btnEmprestar.textContent = 'Solicitar empréstimo';
-            btnEmprestar.className = 'btn-emprestar';
+            if (nome.trim() == perfilNome.textContent.trim()) {
+                var btnRemover = document.createElement('button');
+                btnRemover.type = 'button';
+                btnRemover.textContent = 'Remover da estante';
+                btnRemover.className = 'btn-perfil btn-cancelar';
 
-            btnEmprestar.onclick = function () {
-                totalEmprestimos++;
-                numEmprestimos.textContent = totalEmprestimos;
+                btnRemover.onclick = function () {
+                    listaLivros.removeChild(card);
+                    listaPerto.removeChild(itemPerto);
 
-                emprestimosVazio.style.display = 'none';
+                    totalLivros--;
+                    contador.textContent = totalLivros + ' livros';
 
-                var item = document.createElement('p');
-                item.className = 'item-emprestimo';
-                item.textContent = titulo + ' (' + nome + ', ' + local + ')';
-                listaEmp.appendChild(item);
+                    totalParaEmprestar--;
+                    numParaEmprestar.textContent = totalParaEmprestar;
 
-                // tira o livro da estante e da lista de perto
-                listaLivros.removeChild(card);
-                listaPerto.removeChild(itemPerto);
+                    if (totalLivros == 0) {
+                        mensagemVazia.querySelector('strong').textContent = 'A estante está esperando por histórias.';
+                        mensagemVazia.querySelector('p').textContent = 'Cadastre o primeiro livro usando a aba Adicionar.';
+                        mensagemVazia.style.display = 'block';
 
-                totalLivros--;
-                contador.textContent = totalLivros + ' livros';
+                        listaPerto.textContent = 'Cadastre um livro disponível para começar a ver a comunidade próxima.';
+                        listaPerto.style.textAlign = 'center';
+                    }
+                };
 
-                // se não sobrou nenhum livro, mostra a mensagem
-                if (totalLivros == 0) {
-                    mensagemVazia.querySelector('strong').textContent = 'Não há livros disponíveis para empréstimo.';
-                    mensagemVazia.querySelector('p').textContent = 'Cadastre um livro usando a aba Adicionar.';
-                    mensagemVazia.style.display = 'block';
+                card.appendChild(btnRemover);
+            } else {
+                var btnEmprestar = document.createElement('button');
+                btnEmprestar.type = 'button';
+                btnEmprestar.textContent = 'Solicitar empréstimo';
+                btnEmprestar.className = 'btn-emprestar';
 
-                    listaPerto.textContent = 'Não há livros disponíveis para empréstimo no momento.';
-                    listaPerto.style.textAlign = 'center';
-                }
-            };
+                btnEmprestar.onclick = function () {
+                    totalEmprestimos++;
+                    numEmprestimos.textContent = totalEmprestimos;
 
-            card.appendChild(btnEmprestar);
+                    emprestimosVazio.style.display = 'none';
+
+                    var item = document.createElement('p');
+                    item.className = 'item-emprestimo';
+                    item.textContent = titulo + ' (' + nome + ', ' + local + ')';
+                    listaEmp.appendChild(item);
+
+                    listaLivros.removeChild(card);
+                    listaPerto.removeChild(itemPerto);
+
+                    totalLivros--;
+                    contador.textContent = totalLivros + ' livros';
+
+                    if (totalLivros == 0) {
+                        mensagemVazia.querySelector('strong').textContent = 'Não há livros disponíveis para empréstimo.';
+                        mensagemVazia.querySelector('p').textContent = 'Cadastre um livro usando a aba Adicionar.';
+                        mensagemVazia.style.display = 'block';
+
+                        listaPerto.textContent = 'Não há livros disponíveis para empréstimo no momento.';
+                        listaPerto.style.textAlign = 'center';
+                    }
+                };
+
+                card.appendChild(btnEmprestar);
+            }
 
             totalLivros++;
             contador.textContent = totalLivros + ' livros';
         }
-
-        // ===== DADOS CARREGADOS DOS ARQUIVOS JSON =====
-        // (precisa abrir por um servidor local, ex.: Live Server do VS Code)
 
         function carregarJSON(arquivo) {
             return fetch(arquivo).then(function (resposta) {
@@ -347,15 +374,26 @@
             console.log('Não foi possível carregar um dos arquivos .json');
         }
 
-        // livros da estante
-        carregarJSON('livros.json').then(function (livros) {
+        carregarJSON('perfil.json').then(function (perfil) {
+            perfilNome.textContent = perfil.nome;
+            perfilUsuario.textContent = perfil.usuario;
+            perfilLocal.textContent = perfil.local;
+            perfilBio.textContent = perfil.bio;
+            inputNomeForm.value = perfil.nome;
+
+            totalParaEmprestar = perfil.livrosParaEmprestar;
+            totalEmprestimos = perfil.emprestimos;
+            numParaEmprestar.textContent = totalParaEmprestar;
+            numEmprestimos.textContent = totalEmprestimos;
+
+            return carregarJSON('livros.json');
+        }).then(function (livros) {
             for (var i = 0; i < livros.length; i++) {
                 var livro = livros[i];
                 criarCard(livro.titulo, livro.autor, livro.descricao, livro.local, livro.tempo, livro.nome);
             }
         }).catch(mostrarErro);
 
-        // opções de tempo do formulário
         carregarJSON('tempos.json').then(function (tempos) {
             var selectTempo = document.getElementById('tempo');
             for (var i = 0; i < tempos.length; i++) {
@@ -366,20 +404,6 @@
             }
         }).catch(mostrarErro);
 
-        // dados do perfil
-        carregarJSON('perfil.json').then(function (perfil) {
-            perfilNome.textContent = perfil.nome;
-            perfilUsuario.textContent = perfil.usuario;
-            perfilLocal.textContent = perfil.local;
-            perfilBio.textContent = perfil.bio;
-            perfilAvatar.textContent = inicial(perfil.nome);
-
-            totalParaEmprestar = perfil.livrosParaEmprestar;
-            totalEmprestimos = perfil.emprestimos;
-            numParaEmprestar.textContent = totalParaEmprestar;
-            numEmprestimos.textContent = totalEmprestimos;
-        }).catch(mostrarErro);
-
         form.onsubmit = function (e) {
             e.preventDefault();
 
@@ -388,7 +412,7 @@
             var descricao = document.getElementById('descricao').value;
             var local = document.getElementById('local').value;
             var tempo = document.getElementById('tempo').value;
-            var nome = document.getElementById('nome').value;
+            var nome = inputNomeForm.value;
 
             criarCard(titulo, autor, descricao, local, tempo, nome);
 
@@ -396,6 +420,7 @@
             numParaEmprestar.textContent = totalParaEmprestar;
 
             form.reset();
+            inputNomeForm.value = perfilNome.textContent;
             document.querySelector('a[href="#estante"]').click();
         };
 
@@ -418,49 +443,19 @@
         var btnSalvar = document.getElementById('btn-salvar-perfil');
         var modal = document.getElementById('modal-perfil');
 
-        var perfilNome = document.getElementById('perfil-nome');
-        var perfilUsuario = document.getElementById('perfil-usuario');
-        var perfilLocal = document.getElementById('perfil-local');
-        var perfilBio = document.querySelector('.bio');
-
         var editNome = document.getElementById('edit-nome');
         var editUsuario = document.getElementById('edit-usuario');
         var editLocal = document.getElementById('edit-local');
         var editBio = document.getElementById('edit-bio');
-        var contagemBio = document.getElementById('contagem-bio');
-        var modalAvatar = document.getElementById('modal-avatar');
-        var perfilAvatar = document.getElementById('perfil-avatar');
-
-        // mostra a inicial do nome no avatar (ou o boneco se estiver vazio)
-        function inicial(texto) {
-            texto = texto.trim();
-            if (texto == '') {
-                return '👤';
-            }
-            return texto.charAt(0).toUpperCase();
-        }
-
-        function atualizarContagem() {
-            contagemBio.textContent = editBio.value.length + '/150';
-        }
-
-        editNome.oninput = function () {
-            modalAvatar.textContent = inicial(editNome.value);
-        };
-        editBio.oninput = atualizarContagem;
 
         function abrirModal() {
-            // preenche os campos com o que já está no perfil
             editNome.value = perfilNome.textContent.trim();
             editUsuario.value = perfilUsuario.textContent.trim();
             editLocal.value = perfilLocal.textContent.trim();
-            editBio.value = perfilBio.textContent.replace(/\s+/g, ' ').trim();
-            modalAvatar.textContent = inicial(editNome.value);
-            atualizarContagem();
+            editBio.value = perfilBio.textContent.trim();
 
             modal.classList.add('aberto');
             document.body.classList.add('modal-aberto');
-            editNome.focus();
         }
 
         function fecharModal() {
@@ -473,22 +468,34 @@
         document.getElementById('btn-fechar-modal').onclick = fecharModal;
 
         btnSalvar.onclick = function () {
-            perfilNome.textContent = editNome.value;
+            var nomeAntigo = perfilNome.textContent.trim();
+            var nomeNovo = editNome.value.trim();
+
+            perfilNome.textContent = nomeNovo;
             perfilUsuario.textContent = editUsuario.value;
             perfilLocal.textContent = editLocal.value;
             perfilBio.textContent = editBio.value;
-            perfilAvatar.textContent = inicial(editNome.value);
+            inputNomeForm.value = nomeNovo;
+
+            if (nomeAntigo != nomeNovo && nomeAntigo != '') {
+                var cards = listaLivros.getElementsByClassName('card');
+                for (var i = 0; i < cards.length; i++) {
+                    var pInfo = cards[i].querySelector('.detalhe-livro:last-of-type');
+                    if (pInfo && pInfo.textContent.indexOf('Dono(a): ' + nomeAntigo) != -1) {
+                        pInfo.textContent = pInfo.textContent.replace('Dono(a): ' + nomeAntigo, 'Dono(a): ' + nomeNovo);
+                    }
+                }
+            }
+
             fecharModal();
         };
 
-        // clicar no fundo escuro (fora da caixa) fecha a modal
         modal.onclick = function (e) {
             if (e.target == modal) {
                 fecharModal();
             }
         };
 
-        // tecla Esc fecha a modal
         document.onkeydown = function (e) {
             if (e.key == 'Escape') {
                 fecharModal();
